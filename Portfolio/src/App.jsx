@@ -1,5 +1,6 @@
 import { useState } from "react";
 import WelcomeScreen from "./components/welcomeScreen";
+import Landing from "./components/landing";
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -7,7 +8,7 @@ export default function App() {
   return (
     <>
       {loading && <WelcomeScreen onComplete={() => setLoading(false)} />}
-      {!loading && <div className="app-content">Your main app content goes here.</div>}
+      {!loading && <Landing/>}
     </>
   );
 }
