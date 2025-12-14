@@ -1,6 +1,6 @@
 # DEXOSIS
 
-**Digital Excellence. Turning Vision into Velocity.**
+**Turning Vision into Velocity.**
 
 DEXOSIS is a software and digital services company focused on building reliable, scalable, and business-ready digital solutions. We emphasize clarity, execution, and long-term value in everything we deliver.
 
@@ -66,7 +66,7 @@ Contributions, improvements, and discussions are welcome where applicable.
 
 For collaboration or project inquiries:
 
-- Email: dexosis4@gmail.com.com  
+- Email: dexosis4@gmail.com
 
 ---
 **DEXOSIS — Software & Digital Services**
