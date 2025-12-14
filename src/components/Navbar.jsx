@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import dexosisLogo from "../assets/dexosisLogo.png"; // adjust path if needed
+import dexosisLogo from "../assets/dexosisLogonew.png"; // adjust path if needed
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,11 +22,11 @@ const Navbar = () => {
             <img
               src={dexosisLogo}
               alt="DEXOSIS"
-              className="h-10 w-10 object-contain"
+              className="h-50 w-50 object-contain"
             />
-            <span className="text-2xl font-bold text-black">
+            {/* <span className="text-2xl font-bold text-black">
               DEXOSIS
-            </span>
+            </span> */}
           </a>
 
           {/* Desktop Navigation */}
