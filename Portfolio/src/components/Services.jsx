@@ -47,8 +47,9 @@ const ServicesSection = () => {
         duration: 0.7,
         ease: "linear",
         scrollTrigger: {
+          markers: false,
           trigger: headerRef.current,
-          start: "top 20%",
+          start: "top 80%",
           once: true,
         },
       }
@@ -59,12 +60,13 @@ const ServicesSection = () => {
       { opacity: 0,  },
       {
         opacity: 1,
-        duration: 0.8,
+        duration: 0.5,
         ease: "linear",
         stagger: 0.2,
         scrollTrigger: {
+          markers: false,
           trigger: cardsRef.current[0],
-          start: "top 50%",
+          start: "top 80%",
         },
       }
     );

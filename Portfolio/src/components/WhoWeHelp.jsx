@@ -45,9 +45,9 @@ const WhoWeHelpSection = () => {
         duration: 1,
         ease: "power3.out",
         scrollTrigger: {
-            markers:true,
+            markers:false,
           trigger: headerRef.current,
-          start: "top 50%",
+          start: "top 80%",
           once: true,
         },
       }
@@ -62,9 +62,9 @@ const WhoWeHelpSection = () => {
         duration: 0.5,
         ease: "none",
         scrollTrigger: {
-            markers:true,
+            markers:false,
           trigger: cardRefs.current[0],
-          start: "top 50%",
+          start: "top 80%",
           once: true,
 
         },

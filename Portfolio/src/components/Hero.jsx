@@ -103,7 +103,7 @@ const HeroSection = () => {
           </div>
 
           {/* Stats */}
-          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6">
+          {/* <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
               { value: "50+", label: "Happy Clients" },
               { value: "100+", label: "Projects Done" },
@@ -121,7 +121,7 @@ const HeroSection = () => {
                 <div className="text-sm text-slate-500">{stat.label}</div>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
 
