@@ -11,6 +11,7 @@ export default function App() {
       <Toaster /> 
 
       {loading && <WelcomeScreen onComplete={() => setLoading(false)} />}
+        
       {!loading && <Landing />}
     </>
   );

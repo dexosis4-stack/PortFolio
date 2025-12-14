@@ -8,18 +8,19 @@ const Navbar = () => {
   const navbarRef = useRef(null);
 
 
- useEffect(() => {
-    gsap.fromTo(navbarRef.current, {
-      y:-40,
-      opacity: 0,
-    },
-  {
-      y:0,
+useEffect(() => {
+  gsap.fromTo(
+    navbarRef.current,
+    {opacity: 0 },
+    {
       opacity: 1,
-      duration: 1.3,
-      ease: "power3.out",
-  });
-  }, []);
+      duration: 0.6,
+      ease: "power2.out",
+    }
+  );
+}, []);
+
+
   const navLinks = [
     { name: "Services", href: "#services" },
     { name: "Who We Help", href: "#who-we-help" },
@@ -30,7 +31,7 @@ const Navbar = () => {
 
 
   return (
-    <nav ref={navbarRef} className="navbar fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200">
+    <nav ref={navbarRef} className="navbar z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
