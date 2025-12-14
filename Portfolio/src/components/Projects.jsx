@@ -151,10 +151,20 @@ const PortfolioSection = () => {
 
         {/* CTA */}
         <div ref={ctaRef} className="text-center mt-14">
-          <button className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 transition">
-            View All Projects
-            <ExternalLink className="h-4 w-4" />
-          </button>
+<button className="
+  inline-flex items-center gap-2
+  px-7 py-3
+  rounded-xl
+  border border-cyan-500/40
+  text-cyan-600 font-medium
+  hover:bg-cyan-500/10
+  hover:border-cyan-500
+  transition-all duration-300
+">
+  View All Projects
+  <ExternalLink className="h-4 w-4" />
+</button>
+
         </div>
       </div>
     </section>
