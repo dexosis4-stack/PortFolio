@@ -89,17 +89,31 @@ const HeroSection = () => {
             ref={ctaRef}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <button className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-cyan-500 text-white text-lg font-medium hover:bg-cyan-600 transition">
+            <a
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-cyan-500 text-white text-lg font-medium hover:bg-cyan-600 transition"
+            >
               Get a Free Consultation
               <ArrowRight className="h-5 w-5" />
-            </button>
+            </a>
 
-            <button className="inline-flex items-center gap-3 px-8 py-4 rounded-xl border border-cyan-500/40 text-cyan-600 text-lg font-medium hover:bg-cyan-500/10 transition">
+            <a
+              href="#portfolio"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("portfolio")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl border border-cyan-500/40 text-cyan-600 text-lg font-medium hover:bg-cyan-500/10 transition"
+            >
               <span className="w-10 h-10 rounded-full bg-cyan-100 flex items-center justify-center">
                 <Play className="h-4 w-4 text-cyan-600 fill-cyan-600" />
               </span>
               View Our Work
-            </button>
+            </a>
           </div>
 
           {/* Stats */}
@@ -125,7 +139,7 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Scroll indicator */}
+
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
         <div className="w-6 h-10 border-2 border-slate-400 rounded-full flex justify-center pt-2">
           <div className="w-1.5 h-3 bg-cyan-500 rounded-full animate-bounce" />
