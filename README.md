@@ -67,6 +67,7 @@ Contributions, improvements, and discussions are welcome where applicable.
 For collaboration or project inquiries:
 
 - Email: dexosis4@gmail.com
+- Instagram: https://www.instagram.com/dexosis_web/?hl=en
 
 ---
 **DEXOSIS — Software & Digital Services**
