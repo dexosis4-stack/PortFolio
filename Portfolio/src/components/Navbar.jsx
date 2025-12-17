@@ -8,6 +8,7 @@ const Navbar = () => {
   const navbarRef = useRef(null);
 
 
+
 useEffect(() => {
   gsap.fromTo(
     navbarRef.current,
@@ -52,7 +53,7 @@ useEffect(() => {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-gray-600 hover:text-black transition"
+                className="text-sm scroll-smooth font-medium text-gray-600 hover:text-black transition"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {link.name}
@@ -62,9 +63,11 @@ useEffect(() => {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-4">
+            <a href="#contact">
             <button className="px-5 py-2 rounded-lg bg-black text-white hover:opacity-90 transition">
               Get a Free Consultation
             </button>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -91,7 +94,8 @@ useEffect(() => {
                   {link.name}
                 </a>
               ))}
-              <button className="mt-2 px-5 py-2 rounded-lg bg-black text-white">
+              <button
+               className="mt-2 px-5 py-2 rounded-lg bg-black text-white">
                 Get a Free Consultation
               </button>
             </div>

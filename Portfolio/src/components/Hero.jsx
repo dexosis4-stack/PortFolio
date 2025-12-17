@@ -8,6 +8,18 @@ const HeroSection = () => {
   const subRef = useRef(null);
   const ctaRef = useRef(null);
   const statsRef = useRef([]);
+  const handleSmoothScroll = (e, targetId) => {
+  e.preventDefault();
+
+  const target = document.querySelector(targetId);
+  if (!target) return;
+
+  target.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+};
+
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -89,12 +101,16 @@ const HeroSection = () => {
             ref={ctaRef}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <button className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-cyan-500 text-white text-lg font-medium hover:bg-cyan-600 transition">
+            <button 
+             onClick={(e) => handleSmoothScroll(e, "#contact")}
+            className=" scroll-smooth inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-cyan-500 text-white text-lg font-medium hover:bg-cyan-600 transition">
               Get a Free Consultation
               <ArrowRight className="h-5 w-5" />
             </button>
 
-            <button className="inline-flex items-center gap-3 px-8 py-4 rounded-xl border border-cyan-500/40 text-cyan-600 text-lg font-medium hover:bg-cyan-500/10 transition">
+            <button 
+             onClick={(e) => handleSmoothScroll(e, "#portfolio")}
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-xl border border-cyan-500/40 text-cyan-600 text-lg font-medium hover:bg-cyan-500/10 transition">
               <span className="w-10 h-10 rounded-full bg-cyan-100 flex items-center justify-center">
                 <Play className="h-4 w-4 text-cyan-600 fill-cyan-600" />
               </span>
