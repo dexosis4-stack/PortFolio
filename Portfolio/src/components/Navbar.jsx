@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
-import dexosisLogo from "../assets/dexosisLogonew.png"; // adjust path if needed
+import dexosisLogo from "../assets/DexosisLogonew.png"; // adjust path if needed
 import gsap from "gsap";
 
 const Navbar = () => {
