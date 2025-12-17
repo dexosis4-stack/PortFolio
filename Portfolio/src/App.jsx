@@ -1,6 +1,6 @@
 import { useState } from "react";
-import WelcomeScreen from "./components/welcomeScreen";
-import Landing from "./components/landing";
+import WelcomeScreen from "./components/welcomeScreen.jsx";
+import Landing from "./components/Landing.jsx";
 import { Toaster } from "./components/Ui/toaster";
 
 export default function App() {

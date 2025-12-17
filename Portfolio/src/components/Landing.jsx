@@ -1,13 +1,13 @@
 import React, { useLayoutEffect, useRef } from "react";
-import ServicesSection from "./Services";
-import WhoWeHelpSection from "./WhoWeHelp";
-import WhyUsSection from "./WhyUs.Jsx";
+import ServicesSection from "./Services.jsx";
+import WhoWeHelpSection from "./WhoWeHelp.jsx";
+import WhyUsSection from "./WhyUs.jsx";
 // import PortfolioSection from "./Projects";
-import HeroSection from "./Hero";
-import CTASection from "./CTA";
-import ContactSection from "./Contact";
-import Footer from "./Footer";
-import Navbar from "./Navbar";
+import HeroSection from "./Hero.jsx";
+import CTASection from "./CTA.jsx";
+import ContactSection from "./Contact.jsx";
+import Footer from "./Footer.jsx";
+import Navbar from "./Navbar.jsx";
 import gsap from "gsap";
 
 const Landing = () => {
