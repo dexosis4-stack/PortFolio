@@ -26,7 +26,7 @@ useEffect(() => {
     { name: "Services", href: "#services" },
     { name: "Who We Help", href: "#who-we-help" },
     { name: "Why Us", href: "#why-us" },
-    { name: "Portfolio", href: "#portfolio" },
+    // { name: "Portfolio", href: "#portfolio" },
     { name: "Contact", href: "#contact" },
   ];
 
