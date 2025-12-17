@@ -1,8 +1,8 @@
-import { useLayoutEffect, useRef } from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import ServicesSection from "./Services";
 import WhoWeHelpSection from "./WhoWeHelp";
 import WhyUsSection from "./WhyUs.Jsx";
-import PortfolioSection from "./Projects";
+// import PortfolioSection from "./Projects";
 import HeroSection from "./Hero";
 import CTASection from "./CTA";
 import ContactSection from "./Contact";
@@ -22,15 +22,16 @@ const Landing = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="container opacity-0 mx-auto">
-      <div className="sticky top-0 z-50">
-        <Navbar />
-      </div>
+    <div ref={containerRef} className="container opacity-0">
+    <div className="sticky top-0 z-50">
+      <Navbar />
+
+    </div>
       <HeroSection />
       <ServicesSection />
       <WhoWeHelpSection />
       <WhyUsSection />
-      <PortfolioSection />
+      {/* <PortfolioSection /> */}
       <CTASection />
       <ContactSection />
       <Footer />

@@ -8,6 +8,7 @@ const Navbar = () => {
   const navbarRef = useRef(null);
 
 
+
 useEffect(() => {
   gsap.fromTo(
     navbarRef.current,
@@ -41,6 +42,9 @@ useEffect(() => {
               alt="DEXOSIS"
               className="h-50 w-50 object-contain"
             />
+            {/* <span className="text-2xl font-bold text-black">
+              DEXOSIS
+            </span> */}
           </a>
 
           {/* Desktop Navigation */}
@@ -49,12 +53,8 @@ useEffect(() => {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-gray-600 hover:text-black transition"
+                className="text-sm scroll-smooth font-medium text-gray-600 hover:text-black transition"
                 style={{ animationDelay: `${index * 0.1}s` }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
-                }}
               >
                 {link.name}
               </a>
@@ -63,12 +63,11 @@ useEffect(() => {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-4">
-            <button 
-              className="px-5 py-2 rounded-lg bg-black text-white hover:opacity-90 transition"
-              onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-            >
+            <a href="#contact">
+            <button className="px-5 py-2 rounded-lg bg-black text-white hover:opacity-90 transition">
               Get a Free Consultation
             </button>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -90,22 +89,13 @@ useEffect(() => {
                   key={link.name}
                   href={link.href}
                   className="text-base font-medium text-gray-600 hover:text-black transition py-2"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsOpen(false);
-                    document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
-                  }}
+                  onClick={() => setIsOpen(false)}
                 >
                   {link.name}
                 </a>
               ))}
-              <button 
-                className="mt-2 px-5 py-2 rounded-lg bg-black text-white"
-                onClick={() => {
-                  setIsOpen(false);
-                  document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
+              <button
+               className="mt-2 px-5 py-2 rounded-lg bg-black text-white">
                 Get a Free Consultation
               </button>
             </div>

@@ -7,7 +7,13 @@ gsap.registerPlugin(ScrollTrigger);
 
 const CTASection = () => {
   const sectionRef = useRef(null);
-
+  
+            const openWhatsApp = () => {
+  const message = encodeURIComponent(
+    "Hi! I'd like to book a free business audit with Dexosis."
+  );
+  window.open("https://wa.me/8421083349?text=Hi! I'd like to book a free business audit with Dexosis." + message, "_blank");
+};
   useEffect(() => {
     gsap.fromTo(
       sectionRef.current,
@@ -57,7 +63,9 @@ const CTASection = () => {
             </p>
 
             {/* CTA Button */}
+
             <button
+            onClick={openWhatsApp}
               className="
                 inline-flex items-center gap-2
                 px-8 py-4
