@@ -1,5 +1,10 @@
 @import "tailwindcss";
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px; /* navbar height */
+   overflow-x: hidden;
+  width: 100%;
+}
+body{
+   overflow-x: hidden;
+  width: 100%;
 }
