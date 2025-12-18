@@ -7,26 +7,26 @@ gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
-    title: "Bright Smile Dental",
-    category: "Healthcare",
+    title: "Gift Shop",
+    category: "Shopping",
     description:
-      "A modern, patient-friendly website for a local dental clinic that increased appointment bookings by 80%.",
+      "A modern, patient-friendly website for a demo",
     color: "from-cyan-400/30 to-blue-400/30",
   },
-  {
-    title: "HomeFirst Plumbing",
-    category: "Home Services",
-    description:
-      "Professional landing page with local SEO that put this plumbing business on the first page of Google.",
-    color: "from-emerald-400/30 to-teal-400/30",
-  },
-  {
-    title: "Bella's Boutique",
-    category: "Retail",
-    description:
-      "E-commerce ready website for a fashion boutique that expanded their customer reach beyond their local area.",
-    color: "from-pink-400/30 to-rose-400/30",
-  },
+  // {
+  //   title: "HomeFirst Plumbing",
+  //   category: "Home Services",
+  //   description:
+  //     "Professional landing page with local SEO that put this plumbing business on the first page of Google.",
+  //   color: "from-emerald-400/30 to-teal-400/30",
+  // },
+  // {
+  //   title: "Bella's Boutique",
+  //   category: "Retail",
+  //   description:
+  //     "E-commerce ready website for a fashion boutique that expanded their customer reach beyond their local area.",
+  //   color: "from-pink-400/30 to-rose-400/30",
+  // },
 ];
 
 const PortfolioSection = () => {
