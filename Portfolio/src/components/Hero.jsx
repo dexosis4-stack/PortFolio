@@ -108,14 +108,14 @@ const HeroSection = () => {
               <ArrowRight className="h-5 w-5" />
             </button>
 
-            <button 
+            {/* <button 
              onClick={(e) => handleSmoothScroll(e, "#portfolio")}
             className="inline-flex items-center gap-3 px-8 py-4 rounded-xl border border-cyan-500/40 text-cyan-600 text-lg font-medium hover:bg-cyan-500/10 transition">
               <span className="w-10 h-10 rounded-full bg-cyan-100 flex items-center justify-center">
                 <Play className="h-4 w-4 text-cyan-600 fill-cyan-600" />
               </span>
               View Our Work
-            </button>
+            </button> */}
           </div>
 
           {/* Stats */}
