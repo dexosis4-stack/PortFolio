@@ -10,128 +10,205 @@ const audiences = [
     icon: Building2,
     title: "Local Service Providers",
     description:
-      "Plumbers, electricians, contractors, salons, restaurants, clinics, and other service-based businesses looking to reach more local customers.",
+      "Businesses that rely on trust, visibility, and local demand to grow consistently.",
     benefits: [
-      "Attract nearby customers searching online",
-      "Showcase your services professionally",
-      "Build trust with reviews and testimonials",
+      "Be visible where customers are searching",
+      "Present services with clarity and authority",
+      "Turn visits into real enquiries",
     ],
   },
   {
     icon: Users,
     title: "Small & Growing Businesses",
     description:
-      "SMEs ready to establish or improve their digital presence to compete effectively in today's online marketplace.",
+      "Ambitious teams ready to compete digitally and scale with confidence.",
     benefits: [
-      "Professional website that builds credibility",
-      "Digital tools to scale your operations",
-      "Ongoing support as you grow",
+      "Build credibility from day one",
+      "Create systems that support growth",
+      "Partner with a long-term digital team",
     ],
   },
 ];
 
 const WhoWeHelpSection = () => {
-  const headerRef = useRef(null);
-  const cardRefs = useRef([]);
+  const sectionRef = useRef(null);
+  const panelRefs = useRef([]);
+
+  const labelRef = useRef(null);
+  const headingRef = useRef(null);
+  const paraRef = useRef(null);
 
   useEffect(() => {
-    // Header animation
-    gsap.fromTo(
-      headerRef.current,
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-            markers:false,
-          trigger: headerRef.current,
-          start: "top 80%",
-          once: true,
-        },
-      }
-    );
+    const ctx = gsap.context(() => {
+      /* ---------- WELCOME TEXT (SCROLL TRIGGERED) ---------- */
+      gsap.fromTo(
+        labelRef.current,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+          },
+        }
+      );
 
-    // Cards animation (left & right)
-    gsap.fromTo(
-      cardRefs.current,
-       { opacity: 0} ,
-      {
-        opacity: 1,
-        duration: 0.5,
-        ease: "none",
-        scrollTrigger: {
-            markers:false,
-          trigger: cardRefs.current[0],
-          start: "top 80%",
-          once: true,
+      gsap.fromTo(
+        headingRef.current.children,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: 0.12,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+          },
+        }
+      );
 
-        },
-      }
-    );
+      gsap.fromTo(
+        paraRef.current,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+          },
+        }
+      );
+
+      /* ---------- PANELS ---------- */
+      gsap.fromTo(
+        panelRefs.current,
+        { opacity: 0, y: 60 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          stagger: 0.18,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 65%",
+          },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section id="who-we-help" className="py-20 lg:py-32 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div
-          ref={headerRef}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-cyan-100 text-cyan-600 text-sm font-medium mb-4">
+    <section
+      ref={sectionRef}
+      id="who-we-help"
+      className="
+        relative
+        py-24 sm:py-28 lg:py-40
+        bg-[#0b1220]
+        text-white
+      "
+    >
+      <div className="max-w-7xl mx-auto px-5 sm:px-6">
+        {/* HEADER */}
+        <div className="max-w-xl lg:max-w-3xl mb-16 sm:mb-20 lg:mb-24">
+          <span
+            ref={labelRef}
+            className="text-xs uppercase tracking-widest text-cyan-400 block"
+          >
             Who We Help
           </span>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
-            Built for{" "}
-            <span className="text-cyan-500">Your Business</span>
+          <h2
+            ref={headingRef}
+            className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight"
+          >
+            <span className="block">Designed for businesses</span>
+            <span className="block">that take growth seriously</span>
           </h2>
 
-          <p className="text-lg text-slate-500">
-            We specialize in helping local businesses and SMEs thrive in the
-            digital world.
+          <p
+            ref={paraRef}
+            className="mt-5 sm:mt-6 text-base sm:text-lg text-white/70 max-w-xl"
+          >
+            We work with focused businesses that want clarity, performance,
+            and long-term digital value — not quick fixes.
           </p>
         </div>
 
-        {/* Cards */}
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+        {/* PANELS */}
+        <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
           {audiences.map((audience, index) => (
             <div
               key={audience.title}
-              ref={(el) => (cardRefs.current[index] = el)}
+              ref={(el) => (panelRefs.current[index] = el)}
               className="
-                bg-white rounded-3xl p-8 lg:p-10
-                border border-slate-200
-                shadow-sm
-                transition-all duration-300
-                hover:-translate-y-2
-                hover:shadow-lg
+                group
+                relative
+                rounded-3xl
+                border border-white/10
+                bg-white/5
+                p-8 sm:p-10 lg:p-12
+                transition-all duration-500
+                hover:bg-white/10
               "
             >
-              {/* Top */}
-              <div className="flex items-start gap-5 mb-6">
-                <div className="w-16 h-16 rounded-2xl bg-cyan-100 flex items-center justify-center flex-shrink-0">
-                  <audience.icon className="h-8 w-8 text-cyan-500" />
+              {/* Ambient light */}
+              <div
+                className="
+                  pointer-events-none
+                  absolute inset-0
+                  rounded-3xl
+                  bg-gradient-to-br
+                  from-cyan-500/10
+                  to-transparent
+                  opacity-0
+                  transition-opacity duration-500
+                  group-hover:opacity-100
+                "
+              />
+
+              {/* Header */}
+              <div className="relative z-10 flex gap-5 mb-8">
+                <div className="
+                  w-12 h-12 sm:w-14 sm:h-14
+                  rounded-xl
+                  bg-cyan-500/15
+                  flex items-center justify-center
+                  group-hover:bg-cyan-500
+                  transition-colors
+                ">
+                  <audience.icon className="h-6 w-6 text-cyan-400 group-hover:text-white transition-colors" />
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-semibold text-slate-900 mb-2">
+                  <h3 className="text-xl sm:text-2xl font-semibold mb-2">
                     {audience.title}
                   </h3>
-                  <p className="text-slate-500">
+                  <p className="text-white/70 max-w-md text-sm sm:text-base">
                     {audience.description}
                   </p>
                 </div>
               </div>
 
+              <div className="relative z-10 h-px w-full bg-white/10 mb-6" />
+
               {/* Benefits */}
-              <div className="space-y-3">
+              <div className="relative z-10 space-y-4">
                 {audience.benefits.map((benefit) => (
-                  <div key={benefit} className="flex items-center gap-3">
-                    <CheckCircle className="h-5 w-5 text-emerald-500 flex-shrink-0" />
-                    <span className="text-slate-700">
+                  <div key={benefit} className="flex gap-4">
+                    <CheckCircle className="h-5 w-5 text-cyan-400 mt-0.5 flex-shrink-0" />
+                    <span className="text-white/80 leading-relaxed text-sm sm:text-base">
                       {benefit}
                     </span>
                   </div>
@@ -146,4 +223,3 @@ const WhoWeHelpSection = () => {
 };
 
 export default WhoWeHelpSection;
-

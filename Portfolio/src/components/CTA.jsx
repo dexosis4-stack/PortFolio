@@ -7,79 +7,178 @@ gsap.registerPlugin(ScrollTrigger);
 
 const CTASection = () => {
   const sectionRef = useRef(null);
-  
-            const openWhatsApp = () => {
-  const message = encodeURIComponent(
-    "Hi! I'd like to book a free business audit with Dexosis."
-  );
-  window.open("https://wa.me/8421083349?text=Hi! I'd like to book a free business audit with Dexosis." + message, "_blank");
-};
+  const badgeRef = useRef(null);
+  const headingRef = useRef(null);
+  const textRef = useRef(null);
+  const buttonRef = useRef(null);
+
+  const openWhatsApp = () => {
+    const message = encodeURIComponent(
+      "Hi! I'd like to book a free business audit with Dexosis."
+    );
+    window.open(`https://wa.me/8421083349?text=${message}`, "_blank");
+  };
+
   useEffect(() => {
-    gsap.fromTo(
-      sectionRef.current,
-      { opacity: 0, scale: 0.95 },
-      {
-        opacity: 1,
-        scale: 1,
-        duration: 0.8,
-        ease: "power3.out",
+    const ctx = gsap.context(() => {
+      /* Container entrance */
+      gsap.fromTo(
+        sectionRef.current,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 85%",
+            once: true,
+          },
+        }
+      );
+
+      /* Content sequence (mobile-friendly) */
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
           once: true,
         },
-      }
-    );
+      });
+
+      tl.from(badgeRef.current, {
+        opacity: 0,
+        y: 20,
+        duration: 0.4,
+        ease: "power2.out",
+      })
+        .from(
+          headingRef.current,
+          {
+            opacity: 0,
+            y: 28,
+            duration: 0.6,
+            ease: "power3.out",
+          },
+          "+=0.05"
+        )
+        .from(
+          textRef.current,
+          {
+            opacity: 0,
+            y: 20,
+            duration: 0.5,
+            ease: "power2.out",
+          },
+          "+=0.05"
+        )
+        .from(
+          buttonRef.current,
+          {
+            opacity: 0,
+            y: 24,
+            scale: 0.96,
+            duration: 0.5,
+            ease: "power3.out",
+          },
+          "+=0.1"
+        );
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section className="py-20 lg:py-32">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-20 sm:py-24 lg:py-32 bg-[#f8fafc]">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6">
         <div
           ref={sectionRef}
-          className="relative bg-cyan-500 rounded-3xl p-8 sm:p-12 lg:p-16 overflow-hidden"
+          className="
+            relative
+            rounded-3xl
+            border border-slate-200
+            bg-gradient-to-br from-white via-cyan-50/60 to-white
+            px-5 py-8
+            sm:p-14
+            lg:p-20
+            overflow-hidden
+          "
         >
-          {/* Background glow blobs */}
-          <div className="absolute top-0 right-0 w-72 h-72 bg-white/15 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-          <div className="absolute bottom-0 left-0 w-72 h-72 bg-white/15 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+          {/* Ambient light */}
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-transparent" />
 
-          {/* Content */}
-          <div className="relative z-10 text-center max-w-3xl mx-auto">
+          {/* CONTENT */}
+          <div className="relative z-10 max-w-3xl mx-auto text-center">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 text-white text-sm font-medium mb-6">
+            <div
+              ref={badgeRef}
+              className="
+                inline-flex items-center gap-2
+                px-4 py-2
+                rounded-full
+                bg-cyan-500/10
+                text-cyan-600
+                text-sm font-medium
+                mb-5
+              "
+            >
               <Calendar className="h-4 w-4" />
               Free Business Audit
             </div>
 
             {/* Heading */}
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-              Ready to Grow Your Business Online?
-            </h2>
-
-            {/* Subtext */}
-            <p className="text-lg text-white/90 mb-10 max-w-2xl mx-auto">
-              Book a free consultation and get a personalized roadmap for improving
-              your digital presence. No obligations, just actionable insights.
-            </p>
-
-            {/* CTA Button */}
-
-            <button
-            onClick={openWhatsApp}
+            <h2
+              ref={headingRef}
               className="
-                inline-flex items-center gap-2
-                px-8 py-4
-                rounded-xl
-                bg-white text-cyan-600
-                font-semibold text-lg
-                hover:bg-white/90
-                transition-all duration-300
-                shadow-lg
+                text-[clamp(1.6rem,6vw,3rem)]
+                font-semibold
+                text-slate-900
+                mb-4
+                leading-tight
               "
             >
-              Book Your Free Audit
-              <ArrowRight className="h-5 w-5" />
+              Ready to improve your
+              <br className="hidden sm:block" />
+              digital presence?
+            </h2>
+
+            {/* Text */}
+            <p
+              ref={textRef}
+              className="text-base sm:text-lg text-slate-600 mb-8 max-w-2xl mx-auto"
+            >
+              Get a clear, honest review of your website and online presence —
+              with practical recommendations tailored to your business.
+            </p>
+
+            {/* CTA */}
+            <button
+              ref={buttonRef}
+              onClick={openWhatsApp}
+              className="
+                group
+                w-full sm:w-auto
+                inline-flex items-center justify-center gap-3
+                px-8 py-4
+                rounded-xl
+                bg-cyan-600 text-white
+                font-semibold text-lg
+                transition-all duration-200
+                hover:bg-cyan-500
+                hover:shadow-[0_10px_28px_-12px_rgba(6,182,212,0.45)]
+                active:translate-y-[1px]
+                focus:outline-none
+              "
+            >
+              Book your free audit
+              <ArrowRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
             </button>
+
+            {/* Trust note */}
+            <p className="mt-5 text-sm text-slate-500">
+              No pressure. No sales pitch. Just useful insights.
+            </p>
           </div>
         </div>
       </div>

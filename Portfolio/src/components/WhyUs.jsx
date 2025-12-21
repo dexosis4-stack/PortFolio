@@ -8,121 +8,145 @@ gsap.registerPlugin(ScrollTrigger);
 const reasons = [
   {
     icon: Target,
-    title: "Result-Driven Approach",
+    title: "Result-Driven Thinking",
     description:
-      "Every decision we make is focused on achieving measurable results for your business—more leads, more customers, more growth.",
+      "Every decision we make is tied to outcomes — visibility, leads, conversions, and sustainable growth.",
   },
   {
     icon: Zap,
-    title: "Simple & Transparent Process",
+    title: "Clear & Transparent Process",
     description:
-      "No confusing jargon or hidden steps. We keep things clear, straightforward, and easy to understand at every stage.",
+      "Straightforward workflows, honest communication, and no unnecessary complexity.",
   },
   {
     icon: DollarSign,
-    title: "Affordable Solutions",
+    title: "Designed for Growing Businesses",
     description:
-      "Quality digital services don't have to break the bank. We offer competitive pricing designed for growing businesses.",
+      "Thoughtful pricing and scalable solutions built for businesses that want to move forward.",
   },
   {
     icon: HeartHandshake,
-    title: "Ongoing Support",
+    title: "Long-Term Partnership",
     description:
-      "We don't disappear after launch. Continuous optimization and support to ensure your digital presence keeps delivering.",
+      "We stay involved beyond launch, continuously refining and supporting your digital presence.",
   },
 ];
 
 const WhyUsSection = () => {
+  const sectionRef = useRef(null);
   const headerRef = useRef(null);
   const itemsRef = useRef([]);
 
- useEffect(() => {
-  // Header
-  gsap.fromTo(
-    headerRef.current,
-    { opacity: 0, y: 30 },
-    {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: headerRef.current,
-        start: "top 80%",
-        once: true,
-      },
-    }
-  );
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      /* HEADER */
+      gsap.fromTo(
+        headerRef.current,
+        { opacity: 0, y: 24 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+          },
+        }
+      );
 
-  // 🔥 IMPORTANT FIX
-  gsap.set(itemsRef.current, {
-    opacity: 0,
-    y: 30,
-  });
+      /* ITEMS */
+      gsap.fromTo(
+        itemsRef.current,
+        { opacity: 0, y: 32 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: 0.12,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 70%",
+          },
+        }
+      );
+    }, sectionRef);
 
-  gsap.to(itemsRef.current, {
-    opacity: 1,
-    y: 0,
-    duration: 0.8,
-    ease: "power3.out",
-    stagger: 0.15,
-    scrollTrigger: {
-      trigger: itemsRef.current[0],
-      start: "top 85%",
-      once: true,
-    },
-  });
-}, []);
-
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section
+      ref={sectionRef}
       id="why-us"
-      className="py-20 lg:py-32 bg-slate-950 text-slate-100"
+      className="py-20 sm:py-24 lg:py-36 bg-[#f8fafc]"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+      <div className="max-w-7xl mx-auto px-5 sm:px-6">
+        {/* HEADER */}
         <div
           ref={headerRef}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="max-w-xl lg:max-w-3xl mb-14 sm:mb-18 lg:mb-24"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-cyan-500/10 text-cyan-400 text-sm font-medium mb-4">
-            Why Choose Us
+          <span className="text-xs uppercase tracking-widest text-cyan-600 block">
+            Why Dexosis
           </span>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-            Why Partner with{" "}
-            <span className="text-cyan-400">DEXOSIS</span>
+          <h2 className="mt-3 sm:mt-4 text-3xl sm:text-4xl lg:text-5xl font-semibold text-slate-900 leading-tight">
+            Built on clarity,
+            <br />
+            focused on results
           </h2>
 
-          <p className="text-lg text-slate-400">
-            We're committed to your success with an approach that puts your
-            business goals first.
+          <p className="mt-4 sm:mt-6 text-base sm:text-lg text-slate-600 max-w-xl">
+            We partner with businesses that value thoughtful execution,
+            transparency, and long-term impact.
           </p>
         </div>
 
-        {/* Reasons Grid */}
-        <div className="grid sm:grid-cols-2 gap-12 lg:gap-16 max-w-5xl mx-auto">
+        {/* REASONS */}
+        <div className="grid gap-8 sm:grid-cols-2 sm:gap-x-12 sm:gap-y-14 max-w-5xl">
           {reasons.map((reason, index) => (
             <div
               key={reason.title}
               ref={(el) => (itemsRef.current[index] = el)}
-              className="flex items-start gap-5"
+              className="
+                group
+                relative
+                rounded-2xl
+                bg-white
+                border border-slate-200
+                p-6 sm:p-0
+                sm:rounded-none sm:bg-transparent sm:border-0
+                sm:pl-12 sm:border-l sm:border-slate-200
+                transition-colors duration-300
+                hover:border-cyan-500
+              "
             >
               {/* Icon */}
-              <div className="w-14 h-14 rounded-xl bg-cyan-500/10 flex items-center justify-center flex-shrink-0">
-                <reason.icon className="h-7 w-7 text-cyan-400" />
+              <div
+                className="
+                  absolute sm:left-0 sm:top-0
+                  left-6 top-6
+                  w-10 h-10
+                  rounded-lg
+                  bg-cyan-500/10
+                  flex items-center justify-center
+                  transition-colors duration-300
+                  group-hover:bg-cyan-500
+                "
+              >
+                <reason.icon className="h-5 w-5 text-cyan-600 group-hover:text-white transition-colors" />
               </div>
 
               {/* Text */}
-              <div>
-                <h3 className="text-xl font-semibold mb-2 text-white">
-                  {reason.title}
-                </h3>
-                <p className="text-slate-400 leading-relaxed">
-                  {reason.description}
-                </p>
-              </div>
+              <h3 className="mt-14 sm:mt-0 text-lg sm:text-xl font-semibold text-slate-900 mb-2 sm:mb-3">
+                {reason.title}
+              </h3>
+
+              <p className="text-slate-600 leading-relaxed text-sm sm:text-base max-w-sm">
+                {reason.description}
+              </p>
             </div>
           ))}
         </div>

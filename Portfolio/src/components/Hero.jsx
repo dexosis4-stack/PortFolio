@@ -1,52 +1,106 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { ArrowRight, Play } from "lucide-react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowRight } from "lucide-react";
 
-const HeroSection = () => {
+gsap.registerPlugin(ScrollTrigger);
+
+export default function HeroSection() {
   const heroRef = useRef(null);
-  const headingRef = useRef([]);
+  const contentRef = useRef(null);
+  const lineRefs = useRef([]);
+  const powerRef = useRef(null);
   const subRef = useRef(null);
   const ctaRef = useRef(null);
-  const statsRef = useRef([]);
-  const handleSmoothScroll = (e, targetId) => {
-  e.preventDefault();
-
-  const target = document.querySelector(targetId);
-  if (!target) return;
-
-  target.scrollIntoView({
-    behavior: "smooth",
-    block: "start",
-  });
-};
-
+  const glowRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      /* ---------------- INTRO REVEAL ---------------- */
+      gsap.set([subRef.current, ctaRef.current], { opacity: 0, y: 24 });
 
-      tl.fromTo(
-        headingRef.current,
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, stagger: 0.15, duration: 1 }
-      )
+      const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      intro
         .fromTo(
+          lineRefs.current,
+          { yPercent: 120 },
+          {
+            yPercent: 0,
+            duration: 1,
+            stagger: 0.15,
+          }
+        )
+        .fromTo(
+          powerRef.current,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.8 },
+          "-=0.4"
+        )
+        .to(
           subRef.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.8 },
-          "-=0.5"
+          { opacity: 1, y: 0, duration: 0.6 },
+          "-=0.3"
         )
-        .fromTo(
+        .to(
           ctaRef.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.8 },
+          { opacity: 1, y: 0, duration: 0.6 },
           "-=0.4"
+        );
+
+      /* ---------------- SUBTLE CURSOR PARALLAX (DESKTOP) ---------------- */
+      if (window.matchMedia("(pointer: fine)").matches) {
+        window.addEventListener("mousemove", (e) => {
+          const x = (e.clientX / window.innerWidth - 0.5) * 20;
+          const y = (e.clientY / window.innerHeight - 0.5) * 20;
+
+          gsap.to(powerRef.current, {
+            x,
+            y,
+            duration: 0.8,
+            ease: "power3.out",
+          });
+
+          gsap.to(glowRef.current, {
+            x: e.clientX - window.innerWidth / 2,
+            y: e.clientY - window.innerHeight / 2,
+            duration: 1,
+            ease: "power3.out",
+          });
+        });
+      }
+
+      /* ---------------- PIN & EXIT INTO NEXT SECTION ---------------- */
+      const exitTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: "top top",
+          end: "+=120%",
+          scrub: true,
+        },
+      });
+
+      exitTl
+        .to(contentRef.current, {
+          y: -520,
+          ease: "none",
+        })
+        .to(
+          contentRef.current,
+          {
+            scale: 0.92,
+            opacity: 0.85,
+            ease: "none",
+          },
+          0
         )
-        .fromTo(
-          statsRef.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, stagger: 0.1, duration: 0.6 },
-          "-=0.4"
+        .to(
+          glowRef.current,
+          {
+            opacity: 0,
+            ease: "none",
+          },
+          0
         );
     }, heroRef);
 
@@ -56,109 +110,72 @@ const HeroSection = () => {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen flex items-center bg-slate-50 overflow-hidden"
+      className="relative min-h-screen bg-black text-white overflow-hidden"
     >
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-slate-100" />
-
-      {/* Decorative shapes */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[10%] right-[8%] w-32 h-32 border border-cyan-300/40 rounded-2xl rotate-12" />
-        <div className="absolute bottom-[20%] right-[15%] w-40 h-40 border border-slate-300/40 rounded-full" />
-        <div className="absolute top-[30%] left-[12%] w-16 h-16 bg-emerald-300/40 rounded-lg rotate-45" />
+      {/* Ambient Glow */}
+      <div
+        ref={glowRef}
+        className="pointer-events-none absolute inset-0 flex items-center justify-center"
+      >
+        <div className="w-[600px] h-[600px] rounded-full bg-cyan-500/15 blur-[140px]" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto text-center">
-          {/* Heading */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-slate-900 leading-[0.95] mb-8">
-            <span
-              ref={(el) => (headingRef.current[0] = el)}
-              className="block"
-            >
-              Transform Your
-            </span>
-            <span
-              ref={(el) => (headingRef.current[1] = el)}
-              className="block text-cyan-500"
-            >
-              Business Growth
-            </span>
-          </h1>
-
-          {/* Subheading */}
-          <p
-            ref={subRef}
-            className="text-xl sm:text-2xl text-slate-600 max-w-2xl mx-auto mb-12"
-          >
-            We craft stunning websites and digital solutions that turn visitors
-            into loyal customers.
-          </p>
-
-          {/* CTA */}
-          <div
-            ref={ctaRef}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          >
-            <button 
-             onClick={(e) => handleSmoothScroll(e, "#contact")}
-            className=" scroll-smooth inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-cyan-500 text-white text-lg font-medium hover:bg-cyan-600 transition">
-              Get a Free Consultation
-              <ArrowRight className="h-5 w-5" />
-            </button>
-
-            {/* <button 
-             onClick={(e) => handleSmoothScroll(e, "#portfolio")}
-            className="inline-flex items-center gap-3 px-8 py-4 rounded-xl border border-cyan-500/40 text-cyan-600 text-lg font-medium hover:bg-cyan-500/10 transition">
-              <span className="w-10 h-10 rounded-full bg-cyan-100 flex items-center justify-center">
-                <Play className="h-4 w-4 text-cyan-600 fill-cyan-600" />
-              </span>
-              View Our Work
-            </button> */}
-            
-               <a 
-              href="https://dummysite-ten.vercel.app/"
-            className="pointer-events-auto inline-flex items-center gap-3 px-8 py-4 rounded-xl border border-cyan-500/40 text-cyan-600 text-lg font-medium hover:bg-cyan-500/10 transition">
-              <span className="w-10 h-10 rounded-full bg-cyan-100 flex items-center justify-center">
-                <Play className="h-4 w-4 text-cyan-600 fill-cyan-600" />
-              </span>
-              Check Some Demo Projects
-            </a>
-            
-          </div>
-
-          {/* Stats */}
-          {/* <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { value: "50+", label: "Happy Clients" },
-              { value: "100+", label: "Projects Done" },
-              { value: "5.0", label: "Average Rating" },
-              { value: "24/7", label: "Support" },
-            ].map((stat, index) => (
-              <div
-                key={index}
-                ref={(el) => (statsRef.current[index] = el)}
-                className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm"
-              >
-                <div className="text-3xl md:text-4xl font-bold text-cyan-500 mb-1">
-                  {stat.value}
+      <div
+        ref={contentRef}
+        className="relative z-10 min-h-screen flex items-center"
+      >
+        <div className="w-full px-6">
+          <div className="max-w-7xl mx-auto text-center">
+            {/* Headline */}
+            <h1 className="text-[clamp(3rem,8vw,7rem)] font-semibold leading-[0.95] mb-10">
+              {["THIS IS HOW", "WE BUILD"].map((text, i) => (
+                <div key={i} className="overflow-hidden">
+                  <span
+                    ref={(el) => (lineRefs.current[i] = el)}
+                    className="block"
+                  >
+                    {text}
+                  </span>
                 </div>
-                <div className="text-sm text-slate-500">{stat.label}</div>
+              ))}
+
+              <div
+                ref={powerRef}
+                className="mt-2 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
+              >
+                DIGITAL POWER
               </div>
-            ))}
-          </div> */}
+            </h1>
+
+            {/* Subheading */}
+            <p
+              ref={subRef}
+              className="text-lg sm:text-xl text-white/65 max-w-2xl mx-auto mb-14"
+            >
+              Not websites. Not apps.
+              <br />
+              We engineer digital experiences built to perform.
+            </p>
+
+            {/* CTA */}
+            <div className="flex justify-center">
+              <button
+                ref={ctaRef}
+                className="inline-flex items-center gap-3 px-12 py-5 rounded-full bg-white text-black font-medium text-base hover:bg-white/90 transition"
+              >
+                Start a conversation
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-        <div className="w-6 h-10 border-2 border-slate-400 rounded-full flex justify-center pt-2">
-          <div className="w-1.5 h-3 bg-cyan-500 rounded-full animate-bounce" />
-        </div>
+      {/* Scroll Hint */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/40 text-sm">
+        Scroll
       </div>
     </section>
   );
-};
-
-export default HeroSection;
+}

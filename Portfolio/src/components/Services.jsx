@@ -10,26 +10,25 @@ const services = [
     icon: Layout,
     title: "Website Design & Development",
     description:
-      "Modern, responsive websites that look great on all devices and drive real business results.",
-    image:""
+      "Modern, scalable websites built with clarity, performance, and business intent.",
   },
   {
     icon: Globe,
     title: "Business Landing Pages",
     description:
-      "High-converting landing pages designed to turn visitors into leads and customers.",
+      "Conversion-focused landing experiences designed to guide action and intent.",
   },
   {
     icon: Search,
     title: "Google Visibility & Local SEO",
     description:
-      "Get found by customers searching for your services in your local area.",
+      "Strategic SEO solutions that help customers find you at the right moment.",
   },
   {
     icon: TrendingUp,
     title: "Digital Growth Solutions",
     description:
-      "Comprehensive strategies to grow your online presence and expand your customer base.",
+      "Long-term digital strategies focused on growth, reach, and sustainability.",
   },
 ];
 
@@ -40,108 +39,121 @@ const ServicesSection = () => {
   useEffect(() => {
     gsap.fromTo(
       headerRef.current,
-      { opacity: 0, y: 30 },
+      { opacity: 0, y: 40 },
       {
         opacity: 1,
         y: 0,
-        duration: 0.7,
-        ease: "linear",
+        duration: 0.8,
+        ease: "power3.out",
         scrollTrigger: {
-          markers: false,
           trigger: headerRef.current,
           start: "top 80%",
-          once: true,
         },
       }
     );
 
     gsap.fromTo(
       cardsRef.current,
-      { opacity: 0,  },
+      { opacity: 0, y: 60 },
       {
         opacity: 1,
-        duration: 0.5,
-        ease: "linear",
-        stagger: 0.2,
+        y: 0,
+        duration: 0.9,
+        ease: "power3.out",
+        stagger: 0.15,
         scrollTrigger: {
-          markers: false,
           trigger: cardsRef.current[0],
-          start: "top 80%",
+          start: "top 85%",
         },
       }
     );
   }, []);
 
   return (
-    <section id="services" className="py-20 lg:py-32 bg-slate-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+    <section
+      id="services"
+      className="py-24 lg:py-36 bg-[#f9fbfc]"
+    >
+      <div className="max-w-7xl mx-auto px-6">
+        {/* HEADER */}
         <div
           ref={headerRef}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="max-w-3xl mb-20"
         >
-          <span className="inline-block mb-4 px-4 py-1.5 rounded-full bg-cyan-100 text-cyan-600 text-sm font-medium">
-            What We Do
+          <span className="text-xs uppercase tracking-widest text-cyan-600 font-medium">
+            Capabilities
           </span>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
-            Solutions That Drive{" "}
-            <span className="text-cyan-500">Results</span>
+          <h2 className="mt-4 text-4xl lg:text-5xl font-semibold text-slate-900 leading-tight">
+            Digital solutions
+            <br />
+            built for real growth
           </h2>
 
-          <p className="text-lg text-slate-500">
-            We offer focused digital services that help local businesses establish
-            a strong online presence and attract more customers.
+          <p className="mt-6 text-lg text-slate-600">
+            We help businesses design, launch, and scale digital experiences
+            that are clear, effective, and built to last.
           </p>
         </div>
 
-        {/* Cards */}
-<div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-  {services.map((service, index) => (
-    <div
-      key={service.title}
-      ref={(el) => (cardsRef.current[index] = el)}
-      className="
-        group
-        bg-white rounded-3xl p-8
-        border border-slate-200
-        shadow-sm
-        cursor-pointer
-        transition-all duration-300
-        hover:-translate-y-2
-        hover:shadow-lg
-      "
-    >
-      <div
-        className="
-          w-14 h-14 rounded-2xl
-          bg-cyan-100
-          flex items-center justify-center mb-6
-          transition-all duration-300
-          group-hover:bg-cyan-500
-          group-hover:scale-110
-        "
-      >
-        <service.icon
-          className="
-            h-7 w-7 text-cyan-500
-            transition-colors duration-300
-            group-hover:text-white
-          "
-        />
-      </div>
+        {/* CARDS */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {services.map((service, index) => (
+            <div
+              key={service.title}
+              ref={(el) => (cardsRef.current[index] = el)}
+              className="
+                relative group
+                bg-white
+                rounded-2xl
+                p-8
+                border border-slate-200/70
+                transition-all duration-300
+                hover:border-cyan-500/50
+                hover:-translate-y-1
+                hover:shadow-[0_20px_40px_-20px_rgba(15,23,42,0.15)]
+              "
+            >
+              {/* Accent bar */}
+              <div className="
+                absolute left-0 top-0 h-full w-1
+                bg-cyan-500
+                scale-y-0
+                origin-top
+                transition-transform duration-300
+                group-hover:scale-y-100
+              " />
 
-      <h3 className="text-xl font-semibold text-slate-900 mb-4">
-        {service.title}
-      </h3>
+              {/* Icon */}
+              <div
+                className="
+                  w-12 h-12 mb-6
+                  rounded-xl
+                  bg-slate-100
+                  flex items-center justify-center
+                  transition-all duration-300
+                  group-hover:bg-cyan-500
+                "
+              >
+                <service.icon
+                  className="
+                    h-6 w-6 text-slate-600
+                    transition-colors duration-300
+                    group-hover:text-white
+                  "
+                />
+              </div>
 
-      <p className="text-slate-500 leading-relaxed">
-        {service.description}
-      </p>
-    </div>
-  ))}
-</div>
+              <h3 className="text-lg font-semibold text-slate-900 mb-3">
+                {service.title}
+              </h3>
 
+              <p className="text-slate-600 leading-relaxed text-sm">
+                {service.description}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
