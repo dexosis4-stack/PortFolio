@@ -11,12 +11,14 @@ const services = [
     title: "Website Design & Development",
     description:
       "Modern, scalable websites built with clarity, performance, and business intent.",
+    demo: "https://food-site-ten-chi.vercel.app/",
   },
   {
     icon: Globe,
     title: "Business Landing Pages",
     description:
       "Conversion-focused landing experiences designed to guide action and intent.",
+    demo: "https://dummysite-ten.vercel.app/",
   },
   {
     icon: Search,
@@ -70,16 +72,10 @@ const ServicesSection = () => {
   }, []);
 
   return (
-    <section
-      id="services"
-      className="py-24 lg:py-36 bg-[#f9fbfc]"
-    >
+    <section id="services" className="py-24 lg:py-36 bg-[#f9fbfc]">
       <div className="max-w-7xl mx-auto px-6">
         {/* HEADER */}
-        <div
-          ref={headerRef}
-          className="max-w-3xl mb-20"
-        >
+        <div ref={headerRef} className="max-w-3xl mb-20">
           <span className="text-xs uppercase tracking-widest text-cyan-600 font-medium">
             Capabilities
           </span>
@@ -115,14 +111,16 @@ const ServicesSection = () => {
               "
             >
               {/* Accent bar */}
-              <div className="
-                absolute left-0 top-0 h-full w-1
-                bg-cyan-500
-                scale-y-0
-                origin-top
-                transition-transform duration-300
-                group-hover:scale-y-100
-              " />
+              <div
+                className="
+                  absolute left-0 top-0 h-full w-1
+                  bg-cyan-500
+                  scale-y-0
+                  origin-top
+                  transition-transform duration-300
+                  group-hover:scale-y-100
+                "
+              />
 
               {/* Icon */}
               <div
@@ -151,6 +149,33 @@ const ServicesSection = () => {
               <p className="text-slate-600 leading-relaxed text-sm">
                 {service.description}
               </p>
+
+              {/* Live Example (visible hint + hover reward) */}
+              {service.demo && (
+                <a
+                  href={service.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                    inline-flex items-center
+                    mt-6
+                    text-sm font-medium
+                    text-cyan-600
+                    opacity-60
+                    relative
+                    after:absolute after:left-0 after:-bottom-1
+                    after:h-[1px] after:w-full
+                    after:bg-cyan-600
+                    after:scale-x-0 after:origin-left
+                    after:transition-transform after:duration-300
+                    group-hover:opacity-100
+                    group-hover:after:scale-x-100
+                    transition-all duration-300
+                  "
+                >
+                  View live website →
+                </a>
+              )}
             </div>
           ))}
         </div>

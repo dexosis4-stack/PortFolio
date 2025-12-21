@@ -160,6 +160,7 @@ export default function HeroSection() {
 
             {/* CTA */}
             <div className="flex justify-center">
+              <a href="#contact">
               <button
                 ref={ctaRef}
                 className="inline-flex items-center gap-3 px-12 py-5 rounded-full bg-white text-black font-medium text-base hover:bg-white/90 transition"
@@ -167,6 +168,7 @@ export default function HeroSection() {
                 Start a conversation
                 <ArrowRight className="w-4 h-4" />
               </button>
+              </a>
             </div>
           </div>
         </div>
