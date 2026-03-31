@@ -9,6 +9,7 @@ import ContactSection from "./Contact.jsx";
 import Footer from "./Footer.jsx";
 import Navbar from "./Navbar.jsx";
 import gsap from "gsap";
+import PortfolioSection from "./Projects.jsx";
 
 const Landing = () => {
   const containerRef = useRef(null);
@@ -31,7 +32,7 @@ const Landing = () => {
       <ServicesSection />
       <WhoWeHelpSection />
       <WhyUsSection />
-      {/* <PortfolioSection />  */}
+      <PortfolioSection/> 
       <CTASection />
       <ContactSection />
       <Footer />
